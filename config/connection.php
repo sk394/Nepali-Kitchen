@@ -3,7 +3,7 @@
     session_start();
 
     //Create Constants to Store Non Repeating Values
-    define('SITEURL', 'http://localhost/nepali_kitchen');
+    define('SITEURL', 'http://localhost/nepali_kitchen/');
     define('LOCALHOST', 'localhost');
     define('DB_USERNAME', 'root');
     define('DB_PASSWORD', '@Bimala9847'); // Change this to your password
