@@ -1,41 +1,109 @@
-<?php include('config/connection.php'); ?>
+<?php include('config/connection.php'); 
+  if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']==true){
+    $loggedin= true;
+    $userId = $_SESSION['userId'];
+    $username = $_SESSION['username'];
+  }
+  else{
+    $loggedin = false;
+    $userId = 0;
+  }
+echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="index.php">Nepali Kitchen</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nepali Kitchen</title>
-    <link rel="stylesheet" href="css/style.css">  
-</head>
-<body>
-    <section class="navbar">
-        <div class="container">
-        <div class="logo">
-                <a href="#" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
-                </a>
-            </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Food Categories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">';
+            $sql = "SELECT title, id FROM `food_category`"; 
+            $result = mysqli_query($conn, $sql);
+            while($row = mysqli_fetch_assoc($result)){
+                echo '<a class="dropdown-item" href="categorytofood.php?category_id=' . $row['id'] . '">' . $row['title'] . '</a>';
+            }
+            echo '</div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="order.php">Your Orders</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="aboutus.php">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.php">Contact Us</a>
+          </li>
+          
+        </ul>';
 
-            <div class="menu text-right">
-                <ul>
-                    <li>
-                        <a href="<?php echo SITEURL; ?>">Home</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo SITEURL; ?>food_categories.php">Food Categories</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo SITEURL; ?>foods.php">Dishes</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo SITEURL; ?>contact.php">Contact</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo SITEURL; ?>signup.php">Login</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </section> 
+        $countsql = "SELECT SUM(`itemQuantity`) FROM `viewcart` WHERE `userId`=$userId"; 
+        $countresult = mysqli_query($conn, $countsql);
+        $countrow = mysqli_fetch_assoc($countresult);      
+        $count = $countrow['SUM(`itemQuantity`)'];
+        if(!$count) {
+          $count = 0;
+        }
+        echo '<a href="viewCart.php"><button type="button" class="btn btn-secondary mx-2" title="MyCart">
+          <svg xmlns="img/cart.svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>  
+          <i class="bi bi-cart">Cart(' .$count. ')</i>
+        </button></a>';
+
+        if($loggedin){
+          echo '<ul class="navbar-nav mr-2">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome ' .$username. '</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="partials_front/_logout.php">Logout</a>
+              </div>
+            </li>
+          </ul>
+          <div class="text-center image-size-small position-relative">
+            <a href="viewProfile.php"><img src="images/profile/person-' .$userId. '.jpg" class="rounded-circle" onError="this.src = \'images/profilePic.jpg\'" style="width:40px; height:40px"></a>
+          </div>';
+        }
+        else {
+          echo '
+          <button type="button" class="btn btn-success mx-2"  data-toggle="modal" data-target="#loginModal">Login</button>
+          <button type="button" class="btn btn-success mx-2"  data-toggle="modal" data-target="#signupModal">SignUp</button>';
+        }
+            
+  echo '</div>
+    </nav>';
+
+    include 'partials_front/_LoginModal.php';
+    include 'partials_front/_SignupModal.php';
+
+    if(isset($_GET['signupsuccess']) && $_GET['signupsuccess']=="true") {
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Success!</strong> You can now login.
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+            </div>';
+    }
+    if(isset($_GET['error']) && $_GET['signupsuccess']=="false") {
+      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Warning!</strong> ' .$_GET['error']. '
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+            </div>';
+    }
+    if(isset($_GET['loginsuccess']) && $_GET['loginsuccess']=="true"){
+      echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+              <strong>Success!</strong> You are logged in
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+            </div>';
+    }
+    if(isset($_GET['loginsuccess']) && $_GET['loginsuccess']=="false"){
+      echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>Warning!</strong> Invalid Credentials
+              <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+            </div>';
+    }
+?>

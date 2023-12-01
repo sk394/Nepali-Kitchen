@@ -77,21 +77,37 @@ ALTER TABLE `users`
 -- order_details
 
 CREATE TABLE `order_details` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `food` varchar(150) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `total` decimal(10,2) NOT NULL,
-  `order_date` datetime NOT NULL,
-  `status` varchar(50) NOT NULL,
-  `customer_name` varchar(150) NOT NULL,
-  `customer_contact` varchar(20) NOT NULL,
-  `customer_email` varchar(150) NOT NULL,
-  `customer_address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `orderId` int(21) NOT NULL,
+  `userId` int(21) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `zipCode` int(21) NOT NULL,
+  `phoneNo` bigint(21) NOT NULL,
+  `amount` int(200) NOT NULL,
+  `paymentMode` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=cash on delivery, \r\n1=online ',
+  `orderStatus` enum('0','1','2','3','4','5','6') NOT NULL DEFAULT '0' COMMENT '0=Order Placed.\r\n1=Order Confirmed.\r\n2=Preparing your Order.\r\n3=Your order is on the way!\r\n4=Order Delivered.\r\n5=Order Denied.\r\n6=Order Cancelled.',
+  `orderDate` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`orderId`);
 
 ALTER TABLE `order_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `orderid` int(21) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+-- View Cart
+CREATE TABLE `viewcart` (
+  `id` int(11) NOT NULL,
+  `momo_id` int(11) NOT NULL,
+  `itemQuantity` int(100) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `addedDate` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Order Items
+CREATE TABLE `orderitems` (
+  `id` int(21) NOT NULL,
+  `orderId` int(21) NOT NULL,
+  `momo_id` int(21) NOT NULL,
+  `itemQuantity` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
