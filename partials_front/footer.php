@@ -20,7 +20,7 @@
     <section class="footer">
         <div class="container text-center">
             <div class="bottom_menu">
-                <a href="index.php">Home Page</a>  |  <a href="aboutus.php">About Us</a>  |  <a href="specialdeals.php">Special Deals</a>  |  <a href="food_categories.php">Categories</a>  |  <a href="#">Tutorial Video</a> |<br>
+                <a href="index.php">Home Page</a>  |  <a href="aboutus.php">About Us</a>  |  <a href="specialdeals.php">Special Deals</a>  |  <a href="food_categories.php">Categories</a>  |  <a href="tutorial.php">Tutorial Video</a> |<br>
   |                 <a href="admin/index.php" target="_blank">Administrator</a> |
             </div>
          <div class="bottom_addr">&copy; <?php echo date('Y'); ?>. All Rights Reserved</div>

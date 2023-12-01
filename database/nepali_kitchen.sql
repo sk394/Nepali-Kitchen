@@ -49,3 +49,49 @@ ALTER TABLE `food_items`
 
 ALTER TABLE `food_items`
     MODIFY `momo_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+-- Users
+
+CREATE TABLE `users` (
+  `id` int(21) NOT NULL,
+  `username` varchar(21) NOT NULL,
+  `firstName` varchar(21) NOT NULL,
+  `lastName` varchar(21) NOT NULL,
+  `email` varchar(35) NOT NULL,
+  `phone` bigint(20) NOT NULL,
+  `userType` enum('0','1') NOT NULL DEFAULT '0' COMMENT '0=user\r\n1=admin',
+  `password` varchar(255) NOT NULL,
+  `joinDate` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `users` (`id`, `username`, `firstName`, `lastName`, `email`, `phone`, `userType`, `password`, `joinDate`) VALUES
+(1, 'admin', 'admin', 'admin', 'admin@gmail.com', 1111111111, '1', 'admin', '2021-04-11 11:40:58');
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`) USING BTREE,
+  ADD UNIQUE KEY `username` (`username`);
+
+ALTER TABLE `users`
+  MODIFY `id` int(21) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+-- order_details
+
+CREATE TABLE `order_details` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `food` varchar(150) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `total` decimal(10,2) NOT NULL,
+  `order_date` datetime NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `customer_name` varchar(150) NOT NULL,
+  `customer_contact` varchar(20) NOT NULL,
+  `customer_email` varchar(150) NOT NULL,
+  `customer_address` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `order_details`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
