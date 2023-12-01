@@ -242,3 +242,27 @@ a{
     padding: 1%;
 }
 
+fieldset {
+    border: 1px solid white;
+    margin: 5%;
+    padding: 3%;
+    border-radius: 5px;
+}
+
+/* Order section */
+.order {
+    width: 50%;
+    margin: 0 auto;
+}
+.input-responsive {
+    width: 96%;
+    padding: 1%;
+    margin-bottom: 3%;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.order-label {
+    margin-bottom: 1%;
+    font-weight: bold;
+}

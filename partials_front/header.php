@@ -23,17 +23,19 @@
                         <a href="<?php echo SITEURL; ?>">Home</a>
                     </li>
                     <li>
-                        <a href="<?php echo SITEURL; ?>categories.php">Food Categories</a>
+                        <a href="<?php echo SITEURL; ?>food_categories.php">Food Categories</a>
                     </li>
                     <li>
                         <a href="<?php echo SITEURL; ?>foods.php">Dishes</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="<?php echo SITEURL; ?>contact.php">Contact</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo SITEURL; ?>signup.php">Login</a>
                     </li>
                 </ul>
             </div>
-
             <div class="clearfix"></div>
         </div>
     </section> 
