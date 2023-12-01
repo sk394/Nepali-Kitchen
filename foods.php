@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepali Kitchen</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">  
+</head>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>         
+    <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
+<body>
+
+
 <?php 
     include('partials_front/header.php');
 ?>
@@ -15,81 +32,64 @@
 
 <!-- Basically this is the same as index except we will dump every foods we have -->
 <!-- Food Menu Section-->
-<section class="food-menu">
-    <div class="container">
-        <h2 class="text-center">Our Food Menu</h2>
-
-        <?php 
-        
-        //Getting Foods from Database that are active and featured
-        //SQL Query
-        $sql2 = "SELECT * FROM food_items WHERE active='Yes'";
-
-        //Execute the Query
-        $res2 = mysqli_query($conn, $sql2);
-
-        //Count Rows
-        $count2 = mysqli_num_rows($res2);
-
-        //Check whether food available or not
-        if($count2>0)
-        {
-            //Food Available
-            while($row=mysqli_fetch_assoc($res2))
-            {
-                //Get all the values
-                $id = $row['momo_id'];
-                $title = $row['momo_name'];
-                $price = $row['momo_price'];
-                $description = $row['momo_description'];
+<div class="container my-3" id="cont">
+        <div class="col-lg-4 text-center bg-light my-3" style="margin:auto;border-top: 2px groove black;border-bottom: 2px groove black;">     
+            <h2 class="text-center"><span id="catTitle">Items</span></h2>
+        </div>
+        <div class="row">
+        <?php
+            $sql = "SELECT * FROM `food_items` WHERE active='Yes'";
+            $result = mysqli_query($conn, $sql);
+            $noResult = true;
+            while($row = mysqli_fetch_assoc($result)){
+                $noResult = false;
+                $momoId = $row['momo_id'];
+                $momoName = $row['momo_name'];
+                $momoPrice = $row['momo_price'];
+                $momoDesc = $row['momo_description'];
                 $image_name = $row['momo_image'];
-                ?>
+            
+                echo '<div class="col-xs-3 col-sm-3 col-md-3">
+                        <div class="card" style="width: 18rem;">' ?>
+                   <img src="<?php echo SITEURL; ?>images/momo/<?php echo $image_name; ?>" alt="food_items" class="img-responsive img-curve">
+                      <?php     echo' <div class="card-body">
+                                <h5 class="card-title">' . substr($momoName, 0, 20). '...</h5>
+                                <h6 style="color: #ff0000">Rs. '.$momoPrice. '/-</h6>
+                                <p class="card-text">' . substr($momoDesc, 0, 29). '...</p>   
+                                <div class="row justify-content-center">';
+                                if($loggedin){
+                                    $quaSql = "SELECT `itemQuantity` FROM `viewcart` WHERE momo_id = '$momoId' AND `userId`='$userId'";
+                                    $quaresult = mysqli_query($conn, $quaSql);
+                                    $quaExistRows = mysqli_num_rows($quaresult);
+                                    if($quaExistRows == 0) {
+                                        echo '<form action="partials_front/_manageCart.php" method="POST">
+                                              <input type="hidden" name="itemId" value="'.$momoId. '">
+                                              <button type="submit" name="addToCart" class="btn btn-primary mx-2">Add to Cart</button>';
 
-                <div class="food-menu-box">
-                    <div class="food-menu-img">
-                        <?php 
-                            //Check whether image available or not
-                            if($image_name=="")
-                            {
-                                //Image not Available
-                                echo "<div class='error'>Image not available.</div>";
-                            }
-                            else
-                            {
-                                //Image Available
-                                ?>
-                                <img src="<?php echo SITEURL; ?>images/momo/<?php echo $image_name; ?>" alt="food_items" class="img-responsive img-curve">
-                                <?php
-                            }
-                        ?>
-                        
-                    </div>
-
-                    <div class="food-menu-desc">
-                        <h4><?php echo $title; ?></h4>
-                        <p class="food-price">$<?php echo $price; ?></p>
-                        <p class="food-detail">
-                            <?php echo $description; ?>
-                        </p>
-                        <br>
-
-                        <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">➕ Add to Cart</a>
-                    </div>
-                </div>
-
-                <?php
+                                    }else {
+                                        echo '<a href="viewCart.php"><button class="btn btn-primary mx-2">Go to Cart</button></a>';
+                                    }
+                                }
+                                else{
+                                    echo '<button class="btn btn-primary mx-2" data-toggle="modal" data-target="#loginModal">Add to Cart</button>';
+                                }
+                            echo '</form>                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>';
             }
-        }
-        else
-        {
-            //Food Not Available 
-            echo "<div class='error'>Food not available.</div>";
-        }
-        
-        ?>
-        <div class="clearfix"></div>
+            if($noResult) {
+                echo '<div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <p class="display-4">Sorry In this category No items available.</p>
+                        <p class="lead"> We will update Soon.</p>
+                    </div>
+                </div> ';
+            }
+            ?>
+        </div>
     </div>
- </section>
  <?php 
     include('partials_front/footer.php'); 
 ?>
