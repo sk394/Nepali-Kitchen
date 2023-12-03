@@ -111,3 +111,21 @@ CREATE TABLE `orderitems` (
   `momo_id` int(21) NOT NULL,
   `itemQuantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Tables
+CREATE TABLE `tables` (
+  `table_id` int(10) UNSIGNED NOT NULL,
+  `table_number` int(10) NOT NULL,
+  `table_type` varchar(50) NOT NULL,
+  PRIMARY KEY (`table_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Reservations
+CREATE TABLE `reservations` (
+  `reservation_id` int(10) UNSIGNED NOT NULL,
+  `table_id` int(10) UNSIGNED NOT NULL,
+  `reservation_date` date NOT NULL,
+  `comments` text,
+  `number_of_guests` int(5) NOT NULL,
+  PRIMARY KEY (`reservation_id`),
+  FOREIGN KEY (`table_id`) REFERENCES `tables` (`table_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
