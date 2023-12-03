@@ -111,3 +111,22 @@ CREATE TABLE `orderitems` (
   `momo_id` int(21) NOT NULL,
   `itemQuantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--Special Deals
+CREATE TABLE `special_deals` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `food_name` VARCHAR(100) NOT NULL, 
+    `description` TEXT NOT NULL,
+    `price` DECIMAL(10, 2) NOT NULL,
+    `offer_start_date` DATE NOT NULL,
+    `offer_end_date` DATE NOT NULL, -- Fix: Changed 'offer-end-date' to 'offer_end_date'
+    `image` VARCHAR(255) NOT NULL,
+    PRIMARY KEY(`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+--Addig data in special_deals table
+INSERT INTO special_deals (food_name, description, price, offer_start_date, offer_end_date, image)
+VALUES ('Special Momo Dish', 'A delicious momo with a special twist.', 14.99, '2023-12-01', '2023-12-07', 'momo1.jpg');
+
+INSERT INTO special_deals (food_name, description, price, offer_start_date, offer_end_date, image)
+VALUES ('SelRoti Special', 'Authentic Nepali SelRoti for a delightful experience.', 9.99, '2023-12-10', '2023-12-15', 'selroti.jpg');
