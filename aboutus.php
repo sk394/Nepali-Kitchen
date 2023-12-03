@@ -30,9 +30,39 @@
     </div>
 </section>
 
-<blockquote>
-    <h1>About US</h1>
-</blockquote>
+<?php
+include('partials_front/_dbconnect.php');
+
+// Check if the user is logged in
+if (isset($_SESSION['loggedin'])) {
+    $user_id = $_SESSION['userId'];
+    
+    // Check if the user has already rated the restaurant
+    $check_rating_query = "SELECT * FROM ratings WHERE user_id = $user_id";
+    $check_rating_result = mysqli_query($conn, $check_rating_query);
+    
+    if (mysqli_num_rows($check_rating_result) > 0) {
+        echo '<p>You have already rated the restaurant.</p>';
+    } else {
+        // Display the rating form
+        echo '
+            <form action="process_rating.php" method="POST" style="margin-top: 20px;">
+                <label for="rating" style="font-size: 18px; margin-right: 10px;">Rate the restaurant:</label>
+                <select name="rating" id="rating" required style="padding: 8px; font-size: 16px;">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+                <input type="submit" name="submit" value="Submit Rating" style="padding: 8px 12px; background-color: #007bff; color: #fff; border:none; cursor:pointer;">
+            </form>
+        ';
+    }
+} else {
+    echo '<p>Login to rate the restaurant.</p>';
+}
+?>
 
 <?php 
     include('partials_front/footer.php'); 
