@@ -20,7 +20,6 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
 <script src="https://unpkg.com/bootstrap-show-password@1.2.1/dist/bootstrap-show-password.min.js"></script>
-
 <body>
 
 
@@ -162,26 +161,11 @@
                                 <?php echo $description; ?>
                             </p>
                             <br>
-
                             <?php
                             $loggedin = isset($_SESSION['userId']); // Assuming you have a session variable for user login status
                     
                             if ($loggedin) {
-                                $quaSql = "SELECT `itemQuantity` FROM `viewcart` WHERE momo_id = ? AND `userId` = ?";
-                                $stmt = mysqli_prepare($conn, $quaSql);
-                                mysqli_stmt_bind_param($stmt, "ss", $momo_id, $userId);
-                                mysqli_stmt_execute($stmt);
-                                $quaresult = mysqli_stmt_get_result($stmt);
-                                $quaExistRows = mysqli_num_rows($quaresult);
-
-                                if ($quaExistRows == 0) {
-                                    echo '<form action="partials_front/_manageCart.php" method="POST">
-              <input type="hidden" name="itemId" value="' . $id . '">
-              <button type="submit" name="addToCart" class="btn btn-primary my-2">Add to Cart</button>
-              </form>';
-                                } else {
-                                    echo '<a href="viewCart.php"><button class="btn btn-primary my-2">Go to Cart</button></a>';
-                                }
+                             echo' <a href="order.php?action=add&food_id=' . $id . '" class="btn btn-primary">🛒 Add to Cart</a>';
                             } else {
                                 echo '<button class="btn btn-primary my-2" data-toggle="modal" data-target="#loginModal">Add to Cart</button>';
                             }
@@ -201,7 +185,7 @@
         </div>
 
         <p class="text-center">
-            <a href="#">See All Foods</a>
+            <a href="foods.php">See All Foods</a>
         </p>
     </section>
 

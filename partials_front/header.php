@@ -32,7 +32,7 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             echo '</div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="order.php">Your Orders</a>
+            <a class="nav-link" href="myorder.php">Your Orders</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="aboutus.php">About Us</a>
@@ -42,19 +42,11 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
           </li>
           
         </ul>';
-
-        $countsql = "SELECT SUM(`itemQuantity`) FROM `viewcart` WHERE `userId`=$userId"; 
-        $countresult = mysqli_query($conn, $countsql);
-        $countrow = mysqli_fetch_assoc($countresult);      
-        $count = $countrow['SUM(`itemQuantity`)'];
-        if(!$count) {
-          $count = 0;
-        }
-        echo '<a href="viewCart.php"><button type="button" class="btn btn-secondary mx-2" title="MyCart">
+        echo '<a href="order.php"><button type="button" class="btn btn-secondary mx-2" title="MyCart">
           <svg xmlns="img/cart.svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
           </svg>  
-          <i class="bi bi-cart">Cart(' .$count. ')</i>
+          <i class="bi bi-cart">Cart</i>
         </button></a>';
 
         if($loggedin){
@@ -67,7 +59,7 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             </li>
           </ul>
           <div class="text-center image-size-small position-relative">
-            <a href="viewProfile.php"><img src="images/profile/person-' .$userId. '.jpg" class="rounded-circle" onError="this.src = \'images/profilePic.jpg\'" style="width:40px; height:40px"></a>
+            <a href="#"><img src="images/profile/person-' .$userId. '.jpg" class="rounded-circle" onError="this.src = \'images/profilePic.jpg\'" style="width:40px; height:40px"></a>
           </div>';
         }
         else {

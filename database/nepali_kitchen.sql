@@ -111,3 +111,52 @@ CREATE TABLE `orderitems` (
   `momo_id` int(21) NOT NULL,
   `itemQuantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- admin details
+CREATE TABLE `admin` (
+  `id` int(21) NOT NULL,
+  `fullName` varchar(100) NOT NULL,
+  `username` varchar(21) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `admin` (`id`, `fullName`, `username`, `password`) VALUES
+(1, 'admin', 'admin', 'admin');
+
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+  
+ALTER TABLE `admin`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+-- contact form
+CREATE TABLE IF NOT EXISTS contact_form (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Set utf8mb4 character set for proper Unicode support
+ALTER TABLE contact_form CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+
+CREATE TABLE `special_deals` (
+    `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `food_name` VARCHAR(100) NOT NULL, 
+    `description` TEXT NOT NULL,
+    `price` DECIMAL(10, 2) NOT NULL,
+    `offer_start_date` DATE NOT NULL,
+    `offer_end_date` DATE NOT NULL, -- Fix: Changed 'offer-end-date' to 'offer_end_date'
+    `image` VARCHAR(255) NOT NULL,
+    PRIMARY KEY(`id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+--Addig data in special_deals table
+INSERT INTO special_deals (food_name, description, price, offer_start_date, offer_end_date, image)
+VALUES ('Special Momo Dish', 'A delicious momo with a special twist.', 14.99, '2023-12-01', '2023-12-07', 'momo1.jpg');
+
+INSERT INTO special_deals (food_name, description, price, offer_start_date, offer_end_date, image)
+VALUES ('SelRoti Special', 'Authentic Nepali SelRoti for a delightful experience.', 9.99, '2023-12-10', '2023-12-15', 'selroti.jpg');

@@ -91,22 +91,27 @@
                         ?>
                         
                     </div>
-
-                    <div class="food-menu-desc">
-                        <h4><?php echo $title; ?></h4>
-                        <p class="food-price">$<?php echo $price; ?></p>
-                        <p class="food-detail">
-                            <?php echo $description; ?>
-                        </p>
-                        <br>
-
-                        <a href="<?php echo SITEURL; ?>order.php?food_id=<?php echo $id; ?>" class="btn btn-primary">➕ Add to Cart</a>
+                        <div class="food-menu-desc">
+                                <h4><?php echo $title; ?></h4>
+                                <p class="food-price text-danger ">$<?php echo $price; ?></p>
+                                <p class="food-detail">
+                                    <?php echo $description; ?>
+                                </p>
+                                <br>
+                                <?php
+                            $loggedin = isset($_SESSION['userId']); // Assuming you have a session variable for user login status
+                    
+                            if ($loggedin) {
+                             echo' <a href="order.php?action=add&food_id=' . $id . '" class="btn btn-primary">🛒 Add to Cart</a>';
+                            } else {
+                                echo '<button class="btn btn-primary my-2" data-toggle="modal" data-target="#loginModal">Add to Cart</button>';
+                            }
+                            ?>
+                        </div>
                     </div>
-                </div>
-
-                <?php
+                    <?php
+                }
             }
-        }
         else
         {
             //Food Not Available 
@@ -117,6 +122,7 @@
         <div class="clearfix"></div>
     </div>
  </section>
- <?php 
-    include('partials_front/footer.php'); 
+ 
+<?php 
+    include('partials_front/footer.php');
 ?>
