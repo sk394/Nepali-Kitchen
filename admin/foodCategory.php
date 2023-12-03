@@ -1,6 +1,6 @@
 <?php include('partials/header.php'); ?>
 
-<div class="main-content">
+<div class="main-content" style="height:100%">
     <div class="wrapper">
         <h1>Manage Food Category</h1>
 

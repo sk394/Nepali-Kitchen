@@ -41,8 +41,9 @@
     <!-- Food Categories -->
     <section class="categories">
         <div class="container">
+        <a href="termproject.php" style="text-decoration:underline;">ISP Term Project Report</a>
             <h2 class="text-center">Explore Various Food Categories</h2>
-
+             
             <?php
             //Create SQL Query to Display CAtegories from Database
             $sql = "SELECT * FROM food_category WHERE active='Yes' AND featured='Yes' ORDER BY id DESC LIMIT 3";

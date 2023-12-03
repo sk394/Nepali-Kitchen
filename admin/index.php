@@ -19,8 +19,8 @@
     include('partials/header.php');
 ?>
 
-<div class="main-content">
-            <div class="wrapper">
+<div class="main-content container">
+            <div class="wrapper row justify-content-between">
                 <h1>Administrator Dashboard</h1>
                 <br><br>
                 <?php 
@@ -31,7 +31,6 @@
                     }
                 ?>
                 <br><br>
-
                 <div class="col-4 text-center">
 
                     <?php 
@@ -85,7 +84,7 @@
                     <?php 
                         //Creat SQL Query to Get Total Revenue Generated
                         //Aggregate Function in SQL
-                        $sql4 = "SELECT SUM(total) AS Total FROM order_details WHERE status='Delivered'";
+                        $sql4 = "SELECT SUM(amount) AS Total FROM order_details WHERE orderStatus='4'";
 
                         //Execute the Query
                         $res4 = mysqli_query($conn, $sql4);
@@ -107,7 +106,7 @@
                     
                     <?php 
                         //Sql Query 
-                        $sql6 = "SELECT * FROM tbl_order WHERE status = 'Ordered'";
+                        $sql6 = "SELECT * FROM order_details WHERE orderStatus = '0'";
                         //Execute Query
                         $res6 = mysqli_query($conn, $sql6);
                         //Count Rows
@@ -123,10 +122,8 @@
                     
                     <?php 
                         //Sql Query 
-                        $sql7 = "SELECT * FROM tbl_order WHERE status = 'On Delivery'";
-                        //Execute Query
+                        $sql7 = "SELECT * FROM order_details WHERE orderStatus = '3' ";
                         $res7 = mysqli_query($conn, $sql7);
-                        //Count Rows
                         $count7 = mysqli_num_rows($res7);
                     ?>
 
@@ -140,7 +137,7 @@
                     
                     <?php 
                         //Sql Query 
-                        $sql7 = "SELECT * FROM tbl_order WHERE status = 'Cancelled'";
+                        $sql7 = "SELECT * FROM order_details WHERE orderStatus = '6' ";
                         //Execute Query
                         $res7 = mysqli_query($conn, $sql7);
                         //Count Rows
@@ -169,10 +166,26 @@
                     System Administrator
                 </div>
 
+                <div class="col-4 text-center">
+                    
+                    <?php 
+                        //Sql Query 
+                        $sql9 = "SELECT * FROM users";
+                        //Execute Query
+                        $res9 = mysqli_query($conn, $sql8);
+                        //Count Rows
+                        $count9 = mysqli_num_rows($res8);
+                    ?>
+
+                    <h1><?php echo $count9; ?></h1>
+                    <br />
+                    Our valuable customers
+                </div>
+               </div>
                 <div class="clearfix"></div>
 
             </div>
         </div>
        
 
-<?php include('partials_front/footer.php') ?>
+<?php include('partials/footer.php') ?>

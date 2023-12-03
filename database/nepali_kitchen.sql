@@ -160,3 +160,14 @@ VALUES ('Special Momo Dish', 'A delicious momo with a special twist.', 14.99, '2
 
 INSERT INTO special_deals (food_name, description, price, offer_start_date, offer_end_date, image)
 VALUES ('SelRoti Special', 'Authentic Nepali SelRoti for a delightful experience.', 9.99, '2023-12-10', '2023-12-15', 'selroti.jpg');
+
+
+
+-- create a rating database
+CREATE TABLE ratings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    rating INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);

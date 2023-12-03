@@ -1,8 +1,8 @@
 <?php include('partials/header.php'); ?>
 
-<div class="main-content" style="height:100%">
+<div class="main-content">
     <div class="wrapper">
-        <h1>Manage Food Items</h1>
+        <h1>Week's Special Dishes</h1>
 
         <br /><br />
 
@@ -45,14 +45,14 @@
                 <th>Title</th>
                 <th>Price</th>
                 <th>Image</th>
-                <th>Featured</th>
-                <th>Active</th>
+                <th>Start Date</th>
+                <th>End Date</th>
                 <th>Actions</th>
             </tr>
 
             <?php
             //Create a SQL Query to Get all the Food
-            $sql = "SELECT * FROM food_items";
+            $sql = "SELECT * FROM special_deals";
 
             //Execute the qUery
             $res = mysqli_query($conn, $sql);
@@ -68,13 +68,12 @@
                 //Get the Foods from Database and Display
                 while ($row = mysqli_fetch_assoc($res)) {
                     //get the values from individual columns
-                    $id = $row['momo_id'];
-                    $title = $row['momo_name'];
-                    $price = $row['momo_price'];
-                    $image_name = $row['momo_image'];
-                    $featured = $row['featured'];
-                    $active = $row['active'];
-                    $category_id = $row['momo_category_id'];
+                    $id = $row['id'];
+                    $title = $row['food_name'];
+                    $price = $row['price'];
+                    $image_name = $row['image'];
+                    $startDate = $row['offer_start_date'];
+                    $endDate = $row['offer_end_date'];
                     ?>
 
                     <tr>
@@ -96,23 +95,21 @@
                             } else {
                                 //WE Have Image, Display Image
                                 ?>
-                                <img src="<?php echo SITEURL; ?>images/momo/<?php echo $image_name; ?>" width="100px">
+                                <img src="<?php echo SITEURL; ?>images/special_deals/<?php echo $image_name; ?>" width="100px">
                                 <?php
                             }
                             ?>
                         </td>
                         <td>
-                            <?php echo $featured; ?>
+                            <?php echo $startDate; ?>
                         </td>
                         <td>
-                            <?php echo $active; ?>
+                            <?php echo $endDate; ?>
                         </td>
 
                         <td>
-                            <a href="<?php echo SITEURL; ?>admin/update-food.php?id=<?php echo $id; ?>"
-                                class="btn-secondary">Update Food</a>
-                            <a href="<?php echo SITEURL; ?>admin/delete-food.php?id=<?php echo $id; ?>&image_name=<?php echo $image_name; ?>"
-                                class="btn-danger">Delete Food</a>
+                            <a href="#" class="btn-secondary">Update Food</a>
+                            <a href="#" class="btn-danger">Delete Food</a>
                         </td>
                     </tr>
 
@@ -131,4 +128,6 @@
 
 </div>
 
-<?php include('partials/footer.php'); ?>
+</body>
+
+</html>

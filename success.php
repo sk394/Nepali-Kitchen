@@ -18,7 +18,7 @@
             <p class="lead">Thank you for placing your order. Your order has been successfully processed.</p>
             <hr class="my-4">
             <p>Your total Spend: $<?php echo isset($_SESSION['totalAmount']) ? $_SESSION['totalAmount'] : 0; ?></p>
-            <a class="btn btn-primary btn-lg" href="index.php" role="button">Continue Shopping</a>
+            <a class="btn btn-primary btn-lg" href="index.php" role="button">Continue Fooding</a>
         </div>
     </div>
 

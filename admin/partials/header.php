@@ -22,6 +22,8 @@
                     <li><a href="foodItems.php">Food Items</a></li>
                     <li><a href="orderItems.php">Order Section</a></li>
                     <li><a href="adminDetails.php">Manage Admin</a></li>
+                    <li> <a href="handleMessages.php">Messages</a></li>
+                    <li><a href="specialDeals.php">Special Deals</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 </ul>
             </div>
