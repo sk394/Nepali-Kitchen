@@ -52,7 +52,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $zipcode = $_POST["zipcode"];
         $password = $_POST["password"];
         $address = $address1.", ".$apartment;
-        
+         // Set the session variable for total amount
+       $_SESSION['totalAmount'] = $amount;
+
         $passSql = "SELECT * FROM users WHERE id='$userId'"; 
         $passResult = mysqli_query($conn, $passSql);
         $passRow=mysqli_fetch_assoc($passResult);
@@ -72,10 +74,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 $deletesql = "DELETE FROM `viewcart` WHERE `userId`='$userId'";   
                 $deleteresult = mysqli_query($conn, $deletesql);
-                echo '<script>alert("Thanks for ordering with us. Your order id is ' .$orderId. '.");
-                    window.location.href="http://localhost/nepali_kitchen/index.php";  
-                    </script>';
-                    exit();
+                header('Location:/nepali_kitchen/success.php');
+                exit();
             }
         } 
         else{

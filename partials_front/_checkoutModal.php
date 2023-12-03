@@ -9,7 +9,7 @@
             </button>
         </div>
         <div class="modal-body">
-            <form action="partials/_manageCart.php" method="post">
+            <form action="partials_front/_manageCart.php" method="post">
                 <div class="form-group">
                     <b><label for="address">Address:</label></b>
                     <input class="form-control" id="address" name="address" placeholder="55 Fir Hill" type="text" required minlength="3" maxlength="500">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group col-md-6 mb-0">
                         <b><label for="zipcode">Zip Code:</label></b>
-                        <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="xxxxxx" required pattern="[0-9]{6}" maxlength="6">                    
+                        <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="xxxxxx" required pattern="[0-9]{5}" maxlength="6">                    
                     </div>
                 </div>
                 <div class="form-group">
@@ -39,7 +39,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <input type="hidden" name="amount" value="<?php echo $totalPrice ?>">
+                    <input type="hidden" name="amount" value="<?php echo $totalAmount ?>">
                     <button type="submit" name="checkout" class="btn btn-success">Order</button>
                 </div>
             </form>
