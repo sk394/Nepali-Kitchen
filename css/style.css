@@ -265,3 +265,33 @@ fieldset {
     font-weight: bold;
 }
 
+/* Styles for Special-Deals*/
+.img-responsive {
+    width:45px;
+    height:45px;
+}
+.board {
+    text-align:center;
+}
+
+.card {
+    width: 50vh;
+    height: 50vh;
+    margin: 10px;
+    background-color:light;
+}
+
+.btn {
+    padding-right: 10px;
+}
+
+/* Responsive Design for Small Devices */
+@media (max-width: 576px) {
+.card {
+    position: relative;
+}
+}
+
+/* Add more styles as per your design preferences */
+
+
