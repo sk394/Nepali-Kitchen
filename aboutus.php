@@ -29,6 +29,9 @@
 
     </div>
 </section>
+<div>
+    <p style="color:green; font-size:25px; text-align:center; margin-top:30px;">Rate us!</p>
+</div>
 
 <?php
 include('partials_front/_dbconnect.php');
@@ -42,11 +45,11 @@ if (isset($_SESSION['loggedin'])) {
     $check_rating_result = mysqli_query($conn, $check_rating_query);
     
     if (mysqli_num_rows($check_rating_result) > 0) {
-        echo '<p>You have already rated the restaurant.</p>';
+        echo '<p style="color:blue; font-size:25px; text-align:center;">You have already rated the restaurant.</p>';
     } else {
         // Display the rating form
         echo '
-            <form action="process_rating.php" method="POST" style="margin-top: 20px;">
+            <form action="process_rating.php" method="POST" style="margin-top: 20px; text-align:center; margin-bottom:50px;">
                 <label for="rating" style="font-size: 18px; margin-right: 10px;">Rate the restaurant:</label>
                 <select name="rating" id="rating" required style="padding: 8px; font-size: 16px;">
                     <option value="1">1 Star</option>
