@@ -111,3 +111,16 @@ CREATE TABLE `orderitems` (
   `momo_id` int(21) NOT NULL,
   `itemQuantity` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Contact table to store contact form submission
+CREATE TABLE IF NOT EXISTS contact_form (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Set utf8mb4 character set for proper Unicode support
+ALTER TABLE contact_form CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
