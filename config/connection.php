@@ -6,7 +6,7 @@
     define('SITEURL', 'http://localhost/nepali_kitchen/');
     define('LOCALHOST', 'localhost');
     define('DB_USERNAME', 'root');
-    define('DB_PASSWORD', '@Bimala9847'); // Change this to your password
+    define('DB_PASSWORD', ''); // Change this to your password
     define('DB_NAME', 'nepali_kitchen');
     
     $conn = mysqli_connect(LOCALHOST, DB_USERNAME, DB_PASSWORD) or die(mysqli_error($conn)); //Database Connection
