@@ -72,10 +72,17 @@ This technical document provides a high-level overview of the Nepali Kitchen web
 ### Team's Contribution
 
 - **Suman Khadka:** 
-   - xxxx
-    - xxxx
+   - Led overall architecture design, and handled git pushes and merges.
+   - Implemented the dynamic cart and order page.
+   - Implemented the admin control system.
 
 - **Niraj:**
+    -	Contributed to the database configuration and integration.
+    -	Worked on special deals and user rating management system.
+    -	Implemented the contact form and the database and logic behind it.
 
 - **Niranjan Gaire:**
+    - Implemented the About Us page and handle the FAQ Page.
+    -	Implemented the User Interface and bootstrap usage.
+
 
